@@ -1,4 +1,5 @@
 FROM centos:7
+FROM mhart/alpine-node:latest
 MAINTAINER boerngenschmidt
 
 # Var for first config
@@ -41,6 +42,8 @@ RUN chmod 777 /home/steam/run.sh \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
+RUN npm i http-server -g
+
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 
@@ -50,6 +53,7 @@ COPY instance.cfg /etc/arkmanager/instances/main.cfg
 EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
 # Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
+EXPOSE 8080
 
 VOLUME  /ark
 
