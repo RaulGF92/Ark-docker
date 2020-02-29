@@ -29,5 +29,8 @@ chmod -R 777 /root/
 echo "Starting crond..."
 crond
 
+echo "Starting http-server"
+http-server
+
 # Launch run.sh with user steam
 su -p -c /home/steam/run.sh steam
